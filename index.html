@@ -9,7 +9,7 @@
 <meta name="description" content="只要码不死，就往死里码！">
 <meta name="theme-color" content="#000">
 <title>Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600173725084">
+<link rel="shortcut icon" href="/favicon.ico?v=1600174113043">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -332,6 +332,13 @@
     </span>
     
   </div>
+  
+  
+  
+  <div class="bg-img">
+    <img src="https://pp.qn.img-space.com/g3/M00/03/CE/Cg-77Vhnp_uIS9IqAARlzoFQGZAAAF6eQPyTKMABGXm377.jpg?imageView2/2/w/1200/q/75/ignore-error/1/" />
+  </div>
+  
   
   
   
@@ -1393,7 +1400,15 @@
 
 
   <div class="snow-container"></div>
-  <script src="/media/js/bg/snow.js"></script>
+  <script src="/media/js/bg/canvas-nest.js"></script>
+  <script>
+  const config = {
+    color: '255,0,0',
+    count: 88,
+  };
+  // Using config rendering effect at 'element'.
+  const cn = new CanvasNest(document.querySelector('.snow-container'), config);
+  </script>
 
 
 </html>
