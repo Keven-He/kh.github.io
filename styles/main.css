@@ -2074,7 +2074,7 @@ p > code {
       border-bottom-color: #555;
     }
     .archive-timeline-box::after, .tag-timeline-wrapper::after {
-      background: #eeeeee33;
+      background: #eeeeeecc;
     }h1, h2, h3, h4, h5, h6 {
       color: #555;
     }
@@ -2121,11 +2121,11 @@ p > code {
       }.nav-item a:hover {
         color: #222;
       }.nav-item-active {
-      background: #f9f9f933;
+      background: #f9f9f9cc;
     }
 
     .nav-item:hover {
-      background: #f9f9f933;
+      background: #f9f9f9cc;
       color: rgba(0, 0, 0, 0.98);
     }.site-author-image {
       border-radius: 50%;
@@ -2161,9 +2161,9 @@ p > code {
       color: #fc6423;
       border-bottom-color: #fc6423;
     }.reward-btn-text {
-        background-color: #fcc41933 !important;
+        background-color: #fcc419cc !important;
       }.bg-color {
-      background-color: #f8f9fa33;
+      background-color: #f8f9facc;
     }
     .site-meta {
       background: #000 !important;
@@ -2172,13 +2172,13 @@ p > code {
       background: #000;
     }
     .brand {
-      background: #343a4033;
+      background: #343a40cc;
     }
     .main-title, .brand {
       color: #495057 !important;
     }
     .mist .site-title i {
-      background: #49505733;
+      background: #495057cc;
     }body {
       cursor: default;
     }a {
