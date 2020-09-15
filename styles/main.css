@@ -2161,7 +2161,7 @@ body {
     }.reward-btn-text {
         background-color: #fcc419fe !important;
       }.bg-color {
-      background-color: #fffffffe;
+      background-color: #f8f9fafe;
     }
     .site-meta {
       background: #000 !important;
@@ -2173,10 +2173,10 @@ body {
       background: #343a40fe;
     }
     .main-title, .brand {
-      color: #adb5bd !important;
+      color: #495057 !important;
     }
     .mist .site-title i {
-      background: #adb5bdfe;
+      background: #495057fe;
     }.box-shadow-wrapper {
       box-shadow: none !important;
     }body {
