@@ -8,8 +8,8 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="只要码不死，就往死里码！">
 <meta name="theme-color" content="#000">
-<title>Hello,gridea! | Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600484177942">
+<title>about | Gridea</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1600498301392">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Hello,gridea!" />
+  <meta name="description" content="about" />
   <meta name="keywords" content="" />
 </head>
 
@@ -190,8 +190,7 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -208,7 +207,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">1</span>
+        <span class="site-item-stat-count">0</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -251,199 +250,6 @@
   </div>
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper auto-number auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E5%93%92~">测试用哒~</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -532,7 +338,7 @@
             <section class="post-header">
   <h1 class="post-title">
     <a class="post-title-link" href="https://Keven-He.github.io/post/hellogridea/">
-      Hello,gridea!
+      about
     </a>
   </h1>
   <div class="post-meta">
@@ -546,17 +352,17 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>0<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>148<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>0<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/post/hellogridea/" data-flag-title="Hello,gridea!" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/hellogridea/" data-flag-title="about" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -565,11 +371,7 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h3 id="测试用哒~">测试用哒~</h3>
-<p><s>qaq</s></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="red"><mstyle mathsize="2.074em"><mtext>LaTeX</mtext></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\color{red}\huge\LaTeX</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.86417342em;vertical-align:-0.446947em;"></span><span class="mord text sizing reset-size6 size10" style="color:red;"><span class="mord textrm" style="color:red;">L</span><span class="mspace" style="color:red;margin-right:-0.36em;"></span><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.4356311118611379em;"><span style="top:-2.904999em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord text sizing reset-size10 size6" style="color:red;"><span class="mord textrm sizing reset-size6 size3" style="color:red;">A</span></span></span></span></span></span><span class="mspace" style="color:red;margin-right:-0.15em;"></span><span class="mord text" style="color:red;"><span class="mord textrm" style="color:red;">T</span><span class="mspace" style="color:red;margin-right:-0.1667em;"></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.11397444551591132em;"><span style="top:-2.7845em;"><span class="pstrut" style="height:3em;"></span><span class="mord text sizing reset-size10 size6" style="color:red;"><span class="mord textrm" style="color:red;">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2155em;"><span></span></span></span></span><span class="mspace" style="color:red;margin-right:-0.125em;"></span><span class="mord textrm" style="color:red;">X</span></span></span></span></span></span></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathsize="0.9em"><mtext mathvariant="monospace">本</mtext><mstyle mathsize="2.074em"><msubsup><mtext mathvariant="monospace">人</mtext><mstyle mathsize="0.9em"><msup><mtext mathvariant="monospace">的</mtext><mstyle mathsize="1.2em"><mtext mathvariant="monospace">萌新</mtext><mstyle mathsize="0.9em"><mtext mathvariant="monospace">QAQ</mtext></mstyle></mstyle></msup></mstyle><mstyle mathsize="1.2em"><mtext mathvariant="monospace">是</mtext><mstyle mathsize="0.9em"><mtext mathvariant="monospace">刚学</mtext><mstyle mathsize="1.2em"><mtext mathvariant="monospace">OI</mtext></mstyle></mstyle></mstyle></msubsup><mstyle mathsize="2.074em"><msubsup><mtext mathvariant="monospace">但是</mtext><mstyle mathsize="1em"><mtext>是这样</mtext></mstyle><mstyle mathsize="1.2em"><mtext mathvariant="monospace">即</mtext><mstyle mathsize="0.9em"><mtext mathvariant="monospace">使</mtext></mstyle></mstyle></msubsup><msubsup><mtext mathvariant="monospace">我也</mtext><mstyle mathsize="0.7em"><mtext mathvariant="monospace">声音大声喊出</mtext></mstyle><mstyle mathsize="0.9em"><mtext mathvariant="monospace">要</mtext><mstyle mathsize="1em"><mtext mathvariant="monospace">用</mtext><msub><mtext mathvariant="monospace">蒟</mtext><mrow><mtext mathvariant="monospace">蒻</mtext><mstyle mathsize="1.2em"><mtext mathvariant="monospace">的</mtext></mstyle></mrow></msub></mstyle></mstyle></msubsup><mtext mathvariant="monospace">我谔谔</mtext></mstyle></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\small\texttt{本}\huge\texttt{人}_{\small\texttt{的}^{\large\texttt{萌新}\small\texttt{QAQ}}}^{\large\texttt{是}{\small\texttt{刚学}\large\texttt{OI}}}\huge\texttt{但是}^{\large\texttt{即}{\small\texttt{使}}}_{\normalsize\text{是这样}}\texttt{我也}^{\small\texttt{要}\normalsize\texttt{用}\texttt{蒟}_{\texttt{蒻}\large\texttt{的}}}_{\scriptsize\texttt{声音大声喊出}}\texttt{我谔谔}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.058604em;vertical-align:-0.5724099999999999em;"></span><span class="mord text sizing reset-size6 size5"><span class="mord texttt cjk_fallback">本</span></span><span class="mord sizing reset-size6 size10"><span class="mord text"><span class="mord texttt cjk_fallback">人</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7165834136933462em;"><span style="top:-2.9240067502410803em;margin-right:0.02410800385728062em;"><span class="pstrut" style="height:3.2em;"></span><span class="sizing reset-size10 size8 mtight"><span class="mord mtight"><span class="mord sizing reset-size8 size5"><span class="mord text"><span class="mord texttt cjk_fallback">的</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.1038133333333333em;"><span style="top:-3.489em;margin-right:0.05555555555555556em;"><span class="pstrut" style="height:3.2em;"></span><span class="sizing reset-size5 size2 mtight"><span class="mord mtight"><span class="mord text sizing reset-size2 size7"><span class="mord texttt cjk_fallback">萌新</span></span><span class="mord text sizing reset-size2 size5"><span class="mord texttt">QAQ</span></span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.563em;margin-right:0.02410800385728062em;"><span class="pstrut" style="height:3.2em;"></span><span class="sizing reset-size10 size8 mtight"><span class="mord mtight"><span class="mord text sizing reset-size8 size7"><span class="mord texttt cjk_fallback">是</span></span><span class="mord sizing reset-size8 size7"><span class="mord text sizing reset-size7 size5"><span class="mord texttt cjk_fallback">刚学</span></span><span class="mord text sizing reset-size7 size7"><span class="mord texttt">OI</span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2759932497589199em;"><span></span></span></span></span></span></span><span class="mord sizing reset-size6 size10"><span class="mord text"><span class="mord texttt cjk_fallback">但是</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7165834136933462em;"><span style="top:-2.9530000000000003em;margin-right:0.02410800385728062em;"><span class="pstrut" style="height:3.2em;"></span><span class="sizing reset-size10 size8 mtight"><span class="mord mtight"><span class="mord text sizing reset-size8 size6"><span class="mord cjk_fallback">是这样</span></span></span></span></span><span style="top:-3.563em;margin-right:0.02410800385728062em;"><span class="pstrut" style="height:3.2em;"></span><span class="sizing reset-size10 size8 mtight"><span class="mord mtight"><span class="mord text sizing reset-size8 size7"><span class="mord texttt cjk_fallback">即</span></span><span class="mord sizing reset-size8 size7"><span class="mord text sizing reset-size7 size5"><span class="mord texttt cjk_fallback">使</span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord sizing reset-size6 size10"><span class="mord text"><span class="mord texttt cjk_fallback">我也</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6576528447444552em;"><span style="top:-2.9530000000000003em;margin-right:0.02410800385728062em;"><span class="pstrut" style="height:3.2em;"></span><span class="sizing reset-size10 size8 mtight"><span class="mord mtight"><span class="mord text sizing reset-size8 size3"><span class="mord texttt cjk_fallback">声音大声喊出</span></span></span></span></span><span style="top:-3.563em;margin-right:0.02410800385728062em;"><span class="pstrut" style="height:3.2em;"></span><span class="sizing reset-size10 size8 mtight"><span class="mord mtight"><span class="mord text sizing reset-size8 size5"><span class="mord texttt cjk_fallback">要</span></span><span class="mord text sizing reset-size8 size6"><span class="mord texttt cjk_fallback">用</span></span><span class="mord sizing reset-size8 size6"><span class="mord text"><span class="mord texttt cjk_fallback">蒟</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.811468em;margin-right:0.05em;"><span class="pstrut" style="height:3.2em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord texttt cjk_fallback mtight">蒻</span></span><span class="mord text sizing reset-size3 size7"><span class="mord texttt cjk_fallback">的</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3885320000000001em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mord text sizing reset-size6 size10"><span class="mord texttt cjk_fallback">我谔谔</span></span></span></span></span></p>
-
+              
             </div>
             
               <div class="reward-btn">
@@ -585,7 +387,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://Keven-He.github.io/post/hellogridea/" title="Hello,gridea!">https://Keven-He.github.io/post/hellogridea/</a>
+      <a href="https://Keven-He.github.io/post/hellogridea/" title="about">https://Keven-He.github.io/post/hellogridea/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -640,7 +442,7 @@
         href="https://github.com/hsxyhao/gridea-theme-next" target="_blank">HsxyHao</a>
     </div>
     <div class="poweredby">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> , My Luogu <a href="https://www.luogu.com.cn/user/306045" target="_blank">account</a> , My <a href="https://github.com/Keven-He" target="_blank">github</a>
+      
     </div>
   </footer>
   
@@ -1640,11 +1442,7 @@
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Keven-He.github.io/post/hellogridea/"" data-c="
-          &lt;h3 id=&#34;测试用哒~&#34;&gt;测试用哒~&lt;/h3&gt;
-&lt;p&gt;&lt;s&gt;qaq&lt;/s&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mstyle mathcolor=&#34;red&#34;&gt;&lt;mstyle mathsize=&#34;2.074em&#34;&gt;&lt;mtext&gt;LaTeX&lt;/mtext&gt;&lt;/mstyle&gt;&lt;/mstyle&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\color{red}\huge\LaTeX&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.86417342em;vertical-align:-0.446947em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size6 size10&#34; style=&#34;color:red;&#34;&gt;&lt;span class=&#34;mord textrm&#34; style=&#34;color:red;&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;color:red;margin-right:-0.36em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.4356311118611379em;&#34;&gt;&lt;span style=&#34;top:-2.904999em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size10 size6&#34; style=&#34;color:red;&#34;&gt;&lt;span class=&#34;mord textrm sizing reset-size6 size3&#34; style=&#34;color:red;&#34;&gt;A&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;color:red;margin-right:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text&#34; style=&#34;color:red;&#34;&gt;&lt;span class=&#34;mord textrm&#34; style=&#34;color:red;&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;color:red;margin-right:-0.1667em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.11397444551591132em;&#34;&gt;&lt;span style=&#34;top:-2.7845em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size10 size6&#34; style=&#34;color:red;&#34;&gt;&lt;span class=&#34;mord textrm&#34; style=&#34;color:red;&#34;&gt;E&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2155em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;color:red;margin-right:-0.125em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord textrm&#34; style=&#34;color:red;&#34;&gt;X&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mstyle mathsize=&#34;0.9em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;本&lt;/mtext&gt;&lt;mstyle mathsize=&#34;2.074em&#34;&gt;&lt;msubsup&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;人&lt;/mtext&gt;&lt;mstyle mathsize=&#34;0.9em&#34;&gt;&lt;msup&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;的&lt;/mtext&gt;&lt;mstyle mathsize=&#34;1.2em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;萌新&lt;/mtext&gt;&lt;mstyle mathsize=&#34;0.9em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;QAQ&lt;/mtext&gt;&lt;/mstyle&gt;&lt;/mstyle&gt;&lt;/msup&gt;&lt;/mstyle&gt;&lt;mstyle mathsize=&#34;1.2em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;是&lt;/mtext&gt;&lt;mstyle mathsize=&#34;0.9em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;刚学&lt;/mtext&gt;&lt;mstyle mathsize=&#34;1.2em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;OI&lt;/mtext&gt;&lt;/mstyle&gt;&lt;/mstyle&gt;&lt;/mstyle&gt;&lt;/msubsup&gt;&lt;mstyle mathsize=&#34;2.074em&#34;&gt;&lt;msubsup&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;但是&lt;/mtext&gt;&lt;mstyle mathsize=&#34;1em&#34;&gt;&lt;mtext&gt;是这样&lt;/mtext&gt;&lt;/mstyle&gt;&lt;mstyle mathsize=&#34;1.2em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;即&lt;/mtext&gt;&lt;mstyle mathsize=&#34;0.9em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;使&lt;/mtext&gt;&lt;/mstyle&gt;&lt;/mstyle&gt;&lt;/msubsup&gt;&lt;msubsup&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;我也&lt;/mtext&gt;&lt;mstyle mathsize=&#34;0.7em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;声音大声喊出&lt;/mtext&gt;&lt;/mstyle&gt;&lt;mstyle mathsize=&#34;0.9em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;要&lt;/mtext&gt;&lt;mstyle mathsize=&#34;1em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;用&lt;/mtext&gt;&lt;msub&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;蒟&lt;/mtext&gt;&lt;mrow&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;蒻&lt;/mtext&gt;&lt;mstyle mathsize=&#34;1.2em&#34;&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;的&lt;/mtext&gt;&lt;/mstyle&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mstyle&gt;&lt;/mstyle&gt;&lt;/msubsup&gt;&lt;mtext mathvariant=&#34;monospace&#34;&gt;我谔谔&lt;/mtext&gt;&lt;/mstyle&gt;&lt;/mstyle&gt;&lt;/mstyle&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\small\texttt{本}\huge\texttt{人}_{\small\texttt{的}^{\large\texttt{萌新}\small\texttt{QAQ}}}^{\large\texttt{是}{\small\texttt{刚学}\large\texttt{OI}}}\huge\texttt{但是}^{\large\texttt{即}{\small\texttt{使}}}_{\normalsize\text{是这样}}\texttt{我也}^{\small\texttt{要}\normalsize\texttt{用}\texttt{蒟}_{\texttt{蒻}\large\texttt{的}}}_{\scriptsize\texttt{声音大声喊出}}\texttt{我谔谔}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:2.058604em;vertical-align:-0.5724099999999999em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size6 size5&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;本&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord sizing reset-size6 size10&#34;&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;人&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.7165834136933462em;&#34;&gt;&lt;span style=&#34;top:-2.9240067502410803em;margin-right:0.02410800385728062em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size10 size8 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord sizing reset-size8 size5&#34;&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;的&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.1038133333333333em;&#34;&gt;&lt;span style=&#34;top:-3.489em;margin-right:0.05555555555555556em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size5 size2 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text sizing reset-size2 size7&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;萌新&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size2 size5&#34;&gt;&lt;span class=&#34;mord texttt&#34;&gt;QAQ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.563em;margin-right:0.02410800385728062em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size10 size8 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text sizing reset-size8 size7&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;是&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord sizing reset-size8 size7&#34;&gt;&lt;span class=&#34;mord text sizing reset-size7 size5&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;刚学&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size7 size7&#34;&gt;&lt;span class=&#34;mord texttt&#34;&gt;OI&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.2759932497589199em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord sizing reset-size6 size10&#34;&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;但是&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.7165834136933462em;&#34;&gt;&lt;span style=&#34;top:-2.9530000000000003em;margin-right:0.02410800385728062em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size10 size8 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text sizing reset-size8 size6&#34;&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;是这样&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.563em;margin-right:0.02410800385728062em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size10 size8 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text sizing reset-size8 size7&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;即&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord sizing reset-size8 size7&#34;&gt;&lt;span class=&#34;mord text sizing reset-size7 size5&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;使&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.247em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord sizing reset-size6 size10&#34;&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;我也&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.6576528447444552em;&#34;&gt;&lt;span style=&#34;top:-2.9530000000000003em;margin-right:0.02410800385728062em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size10 size8 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text sizing reset-size8 size3&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;声音大声喊出&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.563em;margin-right:0.02410800385728062em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size10 size8 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text sizing reset-size8 size5&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;要&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size8 size6&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;用&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord sizing reset-size8 size6&#34;&gt;&lt;span class=&#34;mord text&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;蒟&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3448em;&#34;&gt;&lt;span style=&#34;top:-2.811468em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;&lt;span class=&#34;mord text mtight&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback mtight&#34;&gt;蒻&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size3 size7&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;的&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.3885320000000001em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.247em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord text sizing reset-size6 size10&#34;&gt;&lt;span class=&#34;mord texttt cjk_fallback&#34;&gt;我谔谔&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
-">Hello,gridea!</a>
+          ">about</a>
       </div>
       
     </div>
