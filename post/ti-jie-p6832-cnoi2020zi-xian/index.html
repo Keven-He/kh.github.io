@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="只要码不死，就往死里码！">
 <meta name="theme-color" content="#000">
-<title>OI日记 | Gridea</title>
+<title>题解P6832 [Cnoi2020]子弦 | Gridea</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1600518055590">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="OI日记" />
+  <meta name="description" content="题解P6832 [Cnoi2020]子弦" />
   <meta name="keywords" content="" />
 </head>
 
@@ -190,8 +190,7 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -251,204 +250,6 @@
   </div>
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper auto-number auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li><a href="#2020">2020</a>
-<ul>
-<li><a href="#9%E6%9C%88%E4%B8%AD%E6%97%AC">9月中旬</a>
-<ul>
-<li><a href="#19%E6%97%A5">19日</a>
-<ul>
-<li><a href="#%E4%B8%8B%E5%8D%88200-600">下午2:00-6:00</a></li>
-</ul>
-</li>
-<li><a href="#20%E6%97%A5">20日</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -536,8 +337,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://Keven-He.github.io/post/oi-ri-ji/">
-      OI日记
+    <a class="post-title-link" href="https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/">
+      题解P6832 [Cnoi2020]子弦
     </a>
   </h1>
   <div class="post-meta">
@@ -545,7 +346,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-09-19 15:02:09">09.19-in 2020</span>
+      <span class="publish-time" data-t="2020-09-19 20:14:12">09.19-in 2020</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -556,12 +357,12 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>67<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>103<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/post/oi-ri-ji/" data-flag-title="OI日记" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/ti-jie-p6832-cnoi2020zi-xian/" data-flag-title="题解P6832 [Cnoi2020]子弦" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -570,15 +371,18 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h1 id="2020">2020</h1>
-<h2 id="9月中旬">9月中旬</h2>
-<h3 id="19日">19日</h3>
-<h4 id="下午200-600">下午2:00-6:00</h4>
-<p>参加了洛谷月赛，十分钟不到就AC了第一题，差点想复杂了<br>
-后三题不会，只能骗分了<br>
-结果还阔以</p>
-<h3 id="20日">20日</h3>
-<p>随便写写吧，<s>反正也会咕咕咕的</s></p>
+              <p>挺水的，签到题。说是字串，其实看成字母就行了，输入后遍历一下，用个桶存数量，再遍历一下桶取最大值就可以了。</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+string s;
+int a[26],x; 
+int main(){
+    cin &gt;&gt; s;
+    for(int i=0;i&lt;s.length();i++) a[s[i]-'a']++;
+    for(int i=0;i&lt;26;i++) if(a[i]&gt;x) x=a[i]; // if比max()快
+    cout &lt;&lt; x;
+    return 0;
+}</code></pre>
 
             </div>
             
@@ -595,7 +399,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://Keven-He.github.io/post/oi-ri-ji/" title="OI日记">https://Keven-He.github.io/post/oi-ri-ji/</a>
+      <a href="https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/" title="题解P6832 [Cnoi2020]子弦">https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>

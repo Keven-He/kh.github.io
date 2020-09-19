@@ -9,7 +9,7 @@
 <meta name="description" content="只要码不死，就往死里码！">
 <meta name="theme-color" content="#000">
 <title>Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600505354488">
+<link rel="shortcut icon" href="/favicon.ico?v=1600518055590">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -255,8 +255,8 @@
     <div class="article-wrapper bg-color">
       <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://Keven-He.github.io/post/oi-ri-ji/">
-      OI日记
+    <a class="post-title-link" href="https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/">
+      题解P6832 [Cnoi2020]子弦
     </a>
   </h1>
   <div class="post-meta">
@@ -264,7 +264,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-09-19 15:02:09">09.19-in 2020</span>
+      <span class="publish-time" data-t="2020-09-19 20:14:12">09.19-in 2020</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -275,7 +275,7 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>67<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>103<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
@@ -300,10 +300,13 @@
               
             
             
-              <p><h1 id="2020">2020</h1>
-<h2 id="9月中旬">9月中旬</h2>
-<h3 id="19日">19日</h3>
+              <p><p>挺水的，签到题。说是字串，其实看成字母就行了，输入后遍历一下，用个桶存数量，再遍历一下桶取最大值就可以了。</p>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
 
+                
+                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
+                  </code></pre>
                 
               <p>
             
@@ -311,7 +314,7 @@
         
         
         <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://Keven-He.github.io/post/oi-ri-ji/" rel="contents">
+          <a class="btn language" data-lan="read-more" href="https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/" rel="contents">
             阅读全文 »
           </a>
         </div>
@@ -1123,6 +1126,23 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/"" data-c="
+          &lt;p&gt;挺水的，签到题。说是字串，其实看成字母就行了，输入后遍历一下，用个桶存数量，再遍历一下桶取最大值就可以了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;iostream&amp;gt;
+using namespace std;
+string s;
+int a[26],x; 
+int main(){
+    cin &amp;gt;&amp;gt; s;
+    for(int i=0;i&amp;lt;s.length();i++) a[s[i]-&#39;a&#39;]++;
+    for(int i=0;i&amp;lt;26;i++) if(a[i]&amp;gt;x) x=a[i]; // if比max()快
+    cout &amp;lt;&amp;lt; x;
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+">题解P6832 [Cnoi2020]子弦</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://Keven-He.github.io/post/oi-ri-ji/"" data-c="

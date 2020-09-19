@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Keven-He.github.io</id>
     <title>Gridea</title>
-    <updated>2020-09-19T08:49:31.830Z</updated>
+    <updated>2020-09-19T12:21:04.101Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Keven-He.github.io"/>
     <link rel="self" href="https://Keven-He.github.io/atom.xml"/>
@@ -11,10 +11,10 @@
     <icon>https://Keven-He.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[OI日记]]></title>
-        <id>https://Keven-He.github.io/post/oi-ri-ji/</id>
-        <link href="https://Keven-He.github.io/post/oi-ri-ji/">
+        <title type="html"><![CDATA[题解P6832 [Cnoi2020]子弦]]></title>
+        <id>https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/</id>
+        <link href="https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/">
         </link>
-        <updated>2020-09-19T07:02:09.000Z</updated>
+        <updated>2020-09-19T12:14:12.000Z</updated>
     </entry>
 </feed>
