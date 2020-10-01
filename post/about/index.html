@@ -9,7 +9,7 @@
 <meta name="description" content="只要码不死，就往死里码！">
 <meta name="theme-color" content="#000">
 <title>关于 | Heguanzei&#39;s blog</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601540684599">
+<link rel="shortcut icon" href="/favicon.ico?v=1601554879363">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -623,28 +623,54 @@
             
             
             
-  
-    
-      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
 
-<div id="gitalk-container"></div>
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1601551543186&amp;di=9e94499b1d207e9e21f8df8b6fd11949&amp;imgtype=0&amp;src=http%3A%2F%2Fimg.tukexw.com%2Fimg%2Fc901cc64c8ea762a.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
 
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
 <script>
-  var gitalk = new Gitalk({
-    clientID: '8f2864153ed5c06df874',
-    clientSecret: '41b78a18b77abdbcea0f8087110cbadc1f83ca8a',
-    repo: 'Keven-He.github.io',
-    owner: 'Keven-He',
-    admin: ['Keven-He'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-  gitalk.render('gitalk-container')
+  new Valine({
+    el: '#vcomments',
+    appId: 'pF3L9RGL4JsQqa5lwTODNAbw-gzGzoHsz',
+    appKey: 'MqgOkhx45wqX8HypeQboMbKQ',
+    avatar: 'mp',
+    placeholder: 'Just Go Go',
+    pageSize: '10',
+    lang: 'zh-cn',
+    enableQQ: 'true' === 'false',
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    avatarForce: 'true' === 'false',
+  });
 </script>
-    
-    
-  
 
           </div>
         </div>
