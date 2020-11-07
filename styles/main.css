@@ -2186,15 +2186,15 @@ p > code {
     }.box-shadow-wrapper {
       box-shadow: none !important;
     }body {
-      cursor: default;
+      cursor: url('/media/curs/正常选择.cur'), default;
     }a {
-      cursor: pointer;
+      cursor: url('/media/curs/链接选择.cur'), pointer !important;
     }input, textarea, code {
-      cursor: text;
+      cursor: url('/media/curs/文本选择.cur'), text !important;
     }code > span.copy-code {
-      cursor: pointer;
+      cursor: url('/media/curs/后台运行.cur'), text !important;
     }.post img {
-      cursor: zoom-in;
+      cursor: url('/media/curs/移动.cur'), zoom-in !important;
     }.post img {
-      cursor: zoom-out;
+      cursor: url('/media/curs/忙.cur'), zoom-out !important;
     }
