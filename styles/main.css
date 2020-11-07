@@ -2160,7 +2160,9 @@ p > code {
     .active-hidden > a {
       color: #fc6423;
       border-bottom-color: #fc6423;
-    }.bg-color {
+    }.reward-btn-text {
+        background-color: #ffd43bcc !important;
+      }.bg-color {
       background-color: #ffffffcc;
     }
     .gemini .blog-header, .gemini .sidebar-wrapper, .gemini .article-wrapper, .gemini .post, .gemini .page, .gemini .section, .gemini .section-box, .gemini .sidebar-box, .gemini .friends-section {
