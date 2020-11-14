@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="只要码不死，就往死里码！">
 <meta name="theme-color" content="#000">
-<title>CSP2020 游记 | Heguanzei&#39;s blog</title>
+<title>歌单外链备份 | Heguanzei&#39;s blog</title>
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Keven-He/Keven-He.github.io@master/favicon.ico?v=1605353100487">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Keven-He/Keven-He.github.io@master/media/css/gemini.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Keven-He/Keven-He.github.io@master/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="CSP2020 游记" />
-  <meta name="keywords" content="游记" />
+  <meta name="description" content="歌单外链备份" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -203,8 +203,7 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="https://cdn.jsdelivr.net/gh/Keven-He/Keven-He.github.io@master/images/avatar.png"/>
@@ -270,201 +269,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper auto-number auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li><a href="#%E5%88%9D%E8%B5%9B">初赛</a>
-<ul>
-<li><a href="#day-1~-7">day-1~-7</a></li>
-<li><a href="#day-1">day 1</a>
-<ul>
-<li><a href="#%E6%8F%90%E9%AB%98">提高</a></li>
-<li><a href="#%E6%99%AE%E5%8F%8A">普及</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -552,8 +356,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://Keven-He.github.io/post/csp2020-you-ji/">
-      CSP2020 游记
+    <a class="post-title-link" href="https://Keven-He.github.io/post/GdWlBf/">
+      歌单外链备份
     </a>
   </h1>
   <div class="post-meta">
@@ -561,22 +365,9 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-10-13 17:35:23">2020.10.13,Tuesday,5:35:23 PM</span>
+      <span class="publish-time" data-t="2020-11-14 18:55:05">2020.11.14,Saturday,6:55:05 PM</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://Keven-He.github.io/tag/travel notes/">
-        <span>游记</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
@@ -585,12 +376,12 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>185<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>58<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/post/csp2020-you-ji/" data-flag-title="CSP2020 游记" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/GdWlBf/" data-flag-title="歌单外链备份" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -599,15 +390,17 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h1 id="初赛">初赛</h1>
-<h2 id="day-1~-7">day-1~-7</h2>
-<p>一直在复习初赛，终于见到了我的大师弟们(全比我大)</p>
-<h2 id="day-1">day 1</h2>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mstyle mathcolor="white"><mstyle mathsize="0.5em"><mi>p</mi><mi>s</mi><mo>:</mo><mi mathvariant="normal">上</mi><mi mathvariant="normal">午</mi><mi mathvariant="normal">我</mi><mi mathvariant="normal">爸</mi><mi mathvariant="normal">我</mi><mi mathvariant="normal">妈</mi><mi mathvariant="normal">不</mi><mi mathvariant="normal">让</mi><mi mathvariant="normal">我</mi><mi mathvariant="normal">早</mi><mi mathvariant="normal">出</mi><mi mathvariant="normal">去</mi><mi mathvariant="normal">差</mi><mi mathvariant="normal">点</mi><mi mathvariant="normal">迟</mi><mi mathvariant="normal">到</mi><mo>…</mo><mo>…</mo><mi mathvariant="normal">下</mi><mi mathvariant="normal">午</mi><mi mathvariant="normal">他</mi><mi mathvariant="normal">俩</mi><mi mathvariant="normal">又</mi><mi mathvariant="normal">睡</mi><mi mathvariant="normal">过</mi><mi mathvariant="normal">头</mi><mi mathvariant="normal">了</mi><mi mathvariant="normal">还</mi><mi mathvariant="normal">堵</mi><mi mathvariant="normal">车</mi><mi mathvariant="normal">，</mi><mi mathvariant="normal">到</mi><mi mathvariant="normal">了</mi><mi mathvariant="normal">考</mi><mi mathvariant="normal">场</mi><mi mathvariant="normal">就</mi><mi mathvariant="normal">发</mi><mi mathvariant="normal">卷</mi><mi mathvariant="normal">子</mi><mi mathvariant="normal">了</mi><mo>…</mo><mo>…</mo></mstyle></mstyle></mrow><annotation encoding="application/x-tex">\color{white} \tiny ps:上午我爸我妈不让我早出去差点迟到……下午他俩又睡过头了还堵车，到了考场就发卷子了……</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3125em;vertical-align:-0.09722em;"></span><span class="mord mathdefault sizing reset-size6 size1" style="color:white;">p</span><span class="mord mathdefault sizing reset-size6 size1" style="color:white;">s</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel sizing reset-size6 size1" style="color:white;">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.06em;vertical-align:0em;"></span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">上</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">午</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">我</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">爸</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">我</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">妈</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">不</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">让</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">我</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">早</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">出</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">去</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">差</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">点</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">迟</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">到</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner sizing reset-size6 size1" style="color:white;">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner sizing reset-size6 size1" style="color:white;">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">下</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">午</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">他</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">俩</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">又</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">睡</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">过</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">头</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">了</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">还</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">堵</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">车</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">，</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">到</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">了</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">考</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">场</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">就</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">发</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">卷</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">子</span><span class="mord cjk_fallback sizing reset-size6 size1" style="color:white;">了</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner sizing reset-size6 size1" style="color:white;">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner sizing reset-size6 size1" style="color:white;">…</span></span></span></span></p>
-<h3 id="提高">提高</h3>
-<p>还行吧，大多是都是蒙的，得了45分……差点进复赛……</p>
-<h3 id="普及">普及</h3>
-<p>63.5分，<s>但是我居然觉得普及比提高难</s></p>
+              <pre><code>&lt;iframe frameborder=&quot;no&quot; 
+    border=&quot;0&quot; 
+    marginwidth=&quot;0&quot; 
+    marginheight=&quot;0&quot; 
+    width=330 
+    height=450 
+    src=&quot;xxx&quot;&gt;
+&lt;/iframe&gt;
+</code></pre>
+<pre><code>&lt;script src=&quot;https://myhkw.cn/player/js/player.js&quot; id=&quot;myhk&quot; key=&quot;160522044721&quot; m=&quot;1&quot;&gt;&lt;/script&gt;
+</code></pre>
 
             </div>
             
@@ -624,7 +417,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://Keven-He.github.io/post/csp2020-you-ji/" title="CSP2020 游记">https://Keven-He.github.io/post/csp2020-you-ji/</a>
+      <a href="https://Keven-He.github.io/post/GdWlBf/" title="歌单外链备份">https://Keven-He.github.io/post/GdWlBf/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -633,18 +426,12 @@
   </ul>
   <div class="tags">
     
-      <a href="https://Keven-He.github.io/tag/travel notes/"># 游记</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
     </div>
     <div class="nav-next">
-      
-        <a class="nav-pc-next" title="题解P6850 NOI" href="https://Keven-He.github.io/post/ti-jie-noia/">题解P6850 NOI</a>
-        <a class="nav-mobile-next" title="题解P6850 NOI" href="https://Keven-He.github.io/post/ti-jie-noia/">下一篇</a>
-        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
