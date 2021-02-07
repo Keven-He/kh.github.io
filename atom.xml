@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Keven-He.github.io</id>
     <title>Heguanzei&apos;s blog</title>
-    <updated>2021-01-11T03:26:08.773Z</updated>
+    <updated>2021-02-07T05:26:43.227Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Keven-He.github.io"/>
     <link rel="self" href="https://Keven-He.github.io/atom.xml"/>
@@ -11,23 +11,30 @@
     <icon>https://Keven-He.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Heguanzei&apos;s blog</rights>
     <entry>
+        <title type="html"><![CDATA[题解 P7301 【[USACO21JAN] Spaced Out S】]]></title>
+        <id>https://Keven-He.github.io/TJ-P7301/</id>
+        <link href="https://Keven-He.github.io/TJ-P7301/">
+        </link>
+        <updated>2021-02-07T05:22:46.000Z</updated>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[CSP2020 游记]]></title>
-        <id>https://Keven-He.github.io/post/csp2020-you-ji/</id>
-        <link href="https://Keven-He.github.io/post/csp2020-you-ji/">
+        <id>https://Keven-He.github.io/csp2020-you-ji/</id>
+        <link href="https://Keven-He.github.io/csp2020-you-ji/">
         </link>
         <updated>2020-10-13T09:35:23.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[题解P6850 NOI]]></title>
-        <id>https://Keven-He.github.io/post/ti-jie-noia/</id>
-        <link href="https://Keven-He.github.io/post/ti-jie-noia/">
+        <id>https://Keven-He.github.io/ti-jie-noia/</id>
+        <link href="https://Keven-He.github.io/ti-jie-noia/">
         </link>
         <updated>2020-10-09T04:00:00.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[题解P6832 [Cnoi2020]子弦]]></title>
-        <id>https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/</id>
-        <link href="https://Keven-He.github.io/post/ti-jie-p6832-cnoi2020zi-xian/">
+        <id>https://Keven-He.github.io/ti-jie-p6832-cnoi2020zi-xian/</id>
+        <link href="https://Keven-He.github.io/ti-jie-p6832-cnoi2020zi-xian/">
         </link>
         <updated>2020-09-19T12:14:12.000Z</updated>
     </entry>
